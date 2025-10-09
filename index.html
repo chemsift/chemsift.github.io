@@ -3,64 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ChemSift</title>
+  <title>Landing Page</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-  <div class="background"></div>
 
   <header>
-    <div class="content fade-in">
+    <div class="content">
       <h1>ChemSift</h1>
-      <p class="subtitle">Accelerating chemical discovery through intelligent data analysis</p>
+      <p class="subtitle">Harnessing the power of AI for drug discovery</p>
     </div>
   </header>
 
   <section class="para fade-in">
     <p>
-      ChemSift applies artificial intelligence and data science to extract insight from chemical data,
-      enabling faster and more equitable drug discovery.
+      We harness the power of open-source AI to accelerate drug discovery in global health.
+      Our mission is to make predictive models and datasets accessible, ethical, and equitable
+      for researchers worldwide.
     </p>
   </section>
 
   <section class="para fade-in">
     <p>
-      Our approach integrates open chemical databases with predictive models and transparent algorithms,
-      supporting reproducible research and innovation in global health.
+      Collaboration and transparency drive our innovation. We believe in open models,
+      open data, and open minds — working together toward a healthier future for all.
     </p>
   </section>
 
-  <section class="para fade-in">
-    <p>
-      Get in touch at <a href="mailto:info@chemsift.org">info@chemsift.org</a> for collaborations,
-      questions, or partnerships.
-    </p>
-  </section>
-
-  <footer class="site-footer fade-in">
-    <nav class="links">
-      <a href="https://github.com/chemsift" target="_blank">GitHub</a>
+  <footer class="site-footer">
+    <div class="links">
       <a href="#">About</a>
-      <a href="#">Technology</a>
+      <a href="#">Project</a>
+      <a href="#">Publications</a>
       <a href="#">Contact</a>
-    </nav>
-    <div class="copyright">&copy; 2025 ChemSift</div>
+    </div>
+    <p class="copyright">© 2025 ChemSift</p>
   </footer>
 
   <script>
-    // fade-in observer
+    // Fade-in scroll animation
+    const elements = document.querySelectorAll('.fade-in');
     const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.15 });
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // slight parallax feel (background moves slower)
-    const bg = document.querySelector('.background');
-    window.addEventListener('scroll', () => {
-      const offset = window.pageYOffset;
-      bg.style.transform = `translateY(${offset * 0.3}px)`;
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
     });
+    elements.forEach(el => observer.observe(el));
   </script>
+
 </body>
 </html>
