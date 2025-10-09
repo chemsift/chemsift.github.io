@@ -8,6 +8,8 @@
 </head>
 
 <body>
+  <div class="background"></div>
+
   <header>
     <div class="content fade-in">
       <h1>ChemSift</h1>
@@ -15,21 +17,21 @@
     </div>
   </header>
 
-  <section id="about" class="para fade-in">
+  <section class="para fade-in">
     <p>
       ChemSift applies artificial intelligence and data science to extract insight from chemical data,
       enabling faster and more equitable drug discovery.
     </p>
   </section>
 
-  <section id="technology" class="para fade-in">
+  <section class="para fade-in">
     <p>
       Our approach integrates open chemical databases with predictive models and transparent algorithms,
       supporting reproducible research and innovation in global health.
     </p>
   </section>
 
-  <section id="contact" class="para fade-in">
+  <section class="para fade-in">
     <p>
       Get in touch at <a href="mailto:info@chemsift.org">info@chemsift.org</a> for collaborations,
       questions, or partnerships.
@@ -38,23 +40,27 @@
 
   <footer class="site-footer fade-in">
     <nav class="links">
-      <a href="https://github.com/chemsift" target="_blank" rel="noopener">GitHub</a>
-      <a href="#about">About</a>
-      <a href="#technology">Technology</a>
-      <a href="#contact">Contact</a>
+      <a href="https://github.com/chemsift" target="_blank">GitHub</a>
+      <a href="#">About</a>
+      <a href="#">Technology</a>
+      <a href="#">Contact</a>
     </nav>
     <div class="copyright">&copy; 2025 ChemSift</div>
   </footer>
 
-  <!-- Fade-in on scroll -->
   <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.1 });
-
+    // fade-in observer
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.15 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // slight parallax feel (background moves slower)
+    const bg = document.querySelector('.background');
+    window.addEventListener('scroll', () => {
+      const offset = window.pageYOffset;
+      bg.style.transform = `translateY(${offset * 0.3}px)`;
+    });
   </script>
 </body>
 </html>
