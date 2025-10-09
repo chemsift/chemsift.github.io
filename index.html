@@ -1,85 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ChemSift</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <header class="overlay">
-    <div class="content">
+  <header>
+    <div class="content fade-in">
       <h1>ChemSift</h1>
-      <p>Accelerating chemical discovery through intelligent data analysis</p>
-      <nav>
-        <a href="#about">About ChemSift</a>
-        <a href="#products">Products</a>
-        <a href="#team">Team</a>
-        <a href="#contact">Contact</a>
-        <a href="https://github.com/chemsift" target="_blank">GitHub</a>
-      </nav>
+      <p class="subtitle">Accelerating chemical discovery through intelligent data analysis</p>
     </div>
   </header>
 
-  <section id="about">
-    <h2>About ChemSift</h2>
+  <section id="about" class="para fade-in">
     <p>
-      ChemSift leverages AI and data-driven models to enable faster, smarter, and more equitable drug discovery.
-      Our goal is to make chemical intelligence accessible and useful for research teams worldwide.
+      ChemSift applies artificial intelligence and data science to extract insight from chemical data,
+      enabling faster and more equitable drug discovery.
     </p>
   </section>
 
-  <section id="products">
-    <h2>Our Products</h2>
+  <section id="technology" class="para fade-in">
     <p>
-      From cheminformatics tools to predictive analytics pipelines, ChemSift provides open and adaptable
-      technology for computational chemistry and bioinformatics.
-    </p>
-    <div class="cards">
-      <div class="card">
-        <h3>Compound Insights</h3>
-        <p>Analyze molecular datasets with AI-driven pattern recognition.</p>
-      </div>
-      <div class="card">
-        <h3>Reaction Predictor</h3>
-        <p>Predict reaction outcomes and design better synthesis routes.</p>
-      </div>
-      <div class="card">
-        <h3>Data Harmonizer</h3>
-        <p>Unify experimental and computational data across sources.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="team">
-    <h2>Our Team</h2>
-    <p>
-      We are a group of scientists, engineers, and open science advocates working to accelerate innovation in chemistry.
+      Our approach integrates open chemical databases with predictive models and transparent algorithms,
+      supporting reproducible research and innovation in global health.
     </p>
   </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
+  <section id="contact" class="para fade-in">
     <p>
-      Reach out at <a href="mailto:info@chemsift.org">info@chemsift.org</a>
-      or follow our work on <a href="https://github.com/chemsift" target="_blank">GitHub</a>.
+      Get in touch at <a href="mailto:info@chemsift.org">info@chemsift.org</a> for collaborations,
+      questions, or partnerships.
     </p>
   </section>
 
-  <footer>
-    <p>&copy; 2025 ChemSift. All rights reserved.</p>
+  <footer class="site-footer fade-in">
+    <nav class="links">
+      <a href="https://github.com/chemsift" target="_blank" rel="noopener">GitHub</a>
+      <a href="#about">About</a>
+      <a href="#technology">Technology</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="copyright">&copy; 2025 ChemSift</div>
   </footer>
 
+  <!-- Fade-in on scroll -->
   <script>
-    // Smooth scrolling for internal links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
-    });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>

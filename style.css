@@ -1,133 +1,164 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap');
 
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
-  margin: 0;
   font-family: 'Inter', sans-serif;
-  background-color: #0e0e0e;
   color: #fff;
+  background: #000;
+  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
+/* ================================
+   HERO COVER WITH STABLE PARALLAX
+   ================================ */
 header {
-  background: url('assets/Forma_CC_NatureB_OpcioA2.png') no-repeat center center fixed;
-  background-size: cover;
-  height: 100vh;
   position: relative;
-  text-align: center;
-}
-
-.overlay {
-  background: rgba(0, 0, 0, 0.65);
-  height: 100%;
+  height: 165vh;                  /* tall, cinematic cover */
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  padding: 0 1.5rem;
+  perspective: 1px;
+  transform-style: preserve-3d;
+  overflow: hidden;
 }
 
+/* Background layer (deeper, anchored, no black bands) */
+header::before {
+  content: "";
+  position: absolute;
+  /* overscan so drifting never exposes edges */
+  inset: -12%;
+  background: url('assets/background_vertical.png') no-repeat center top;
+  background-size: cover;
+  transform: translateZ(-1.35px) scale(2.4);
+  z-index: -1;
+  /* gentle drift; limited amplitude to avoid top gap */
+  animation: floatDepth 16s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Foreground content (moves faster than bg) */
+.content {
+  position: relative;
+  transform: translateZ(0.45px) scale(0.9);
+  max-width: 980px;
+  padding: 0 2rem;
+}
+
+/* Hero text — sleek & restrained */
 .content h1 {
-  font-size: 4rem;
-  margin-bottom: 0.5rem;
-  letter-spacing: 1px;
+  font-size: clamp(1.9rem, 5.2vw, 3.8rem);
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: none;
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
-.content p {
-  font-size: 1.2rem;
-  opacity: 0.8;
-  margin-bottom: 2rem;
+.subtitle {
+  font-size: clamp(0.95rem, 1.5vw, 1.2rem);
+  font-weight: 300;
+  margin-top: 0.6rem;
+  opacity: 0.9;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-nav a {
+/* ================================
+   FLOATING PARAGRAPHS (no shading)
+   ================================ */
+.para {
+  max-width: 760px;
+  margin: 7rem auto;
+  padding: 0 1.25rem;
+  text-align: center;
+}
+
+.para p {
+  font-size: clamp(0.98rem, 1.35vw, 1.1rem);
+  line-height: 1.85;
+  font-weight: 300;
+  color: #f2f2f2;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.35); /* readability without overlay */
+}
+
+.para a {
   color: #fff;
   text-decoration: none;
-  margin: 0 1rem;
-  font-weight: 500;
-  position: relative;
+  border-bottom: 1px solid rgba(255,255,255,0.35);
+  transition: border-color 0.25s ease, color 0.25s ease;
 }
-
-nav a::after {
-  content: '';
-  display: block;
-  height: 2px;
-  width: 0;
-  background: #00d4ff;
-  transition: width 0.3s;
-  margin: auto;
-}
-
-nav a:hover::after {
-  width: 100%;
-}
-
-/* Section styling */
-section {
-  padding: 5rem 10%;
-  background: #111;
-  border-bottom: 1px solid #222;
-}
-
-section:nth-child(even) {
-  background: #181818;
-}
-
-h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+.para a:hover {
   color: #00d4ff;
+  border-color: #00d4ff;
 }
 
-p {
-  max-width: 800px;
-  margin: 0 auto;
-  line-height: 1.6;
-  opacity: 0.9;
+/* ================================
+   FOOTER (links separated cleanly)
+   ================================ */
+.site-footer {
+  text-align: center;
+  padding: 3.5rem 1rem 4.5rem;
+  background: transparent;
+  margin-top: 7rem;
 }
 
-/* Cards for products */
-.cards {
+.site-footer .links {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
-  margin-top: 2rem;
+  gap: 1.6rem;
+  margin-bottom: 1.8rem;          /* clear space above copyright */
+  flex-wrap: wrap;
 }
 
-.card {
-  background: #202020;
-  border-radius: 12px;
-  padding: 2rem;
-  width: 280px;
-  text-align: center;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  transition: transform 0.3s, box-shadow 0.3s;
+.site-footer .links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  transition: color 0.25s ease;
+}
+.site-footer .links a:hover { color: #00d4ff; }
+
+.site-footer .copyright {
+  color: #cfcfcf;
+  font-size: 0.92rem;
+  opacity: 0.95;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+/* ================================
+   ANIMATIONS
+   ================================ */
+@keyframes floatDepth {
+  from { transform: translateZ(-1.35px) scale(2.4) translateY(0); }
+  to   { transform: translateZ(-1.35px) scale(2.4) translateY(22px); }
 }
 
-footer {
-  background: #0a0a0a;
-  text-align: center;
-  padding: 2rem;
-  font-size: 0.9rem;
-  color: #aaa;
+.fade-in {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-a {
-  color: #00d4ff;
+/* ================================
+   RESPONSIVE
+   ================================ */
+@media (max-width: 960px) {
+  header { height: 150vh; }
+  .para { margin: 5.5rem auto; }
 }
 
-@media (max-width: 768px) {
-  .content h1 {
-    font-size: 2.5rem;
-  }
-  .cards {
-    flex-direction: column;
-    align-items: center;
-  }
-  nav a {
-    display: block;
-    margin: 1rem 0;
-  }
+@media (max-width: 720px) {
+  .content { padding: 0 1.25rem; }
+  .para { margin: 4.5rem auto; }
+  .site-footer .links { gap: 1.1rem; }
 }
